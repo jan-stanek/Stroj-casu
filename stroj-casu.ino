@@ -57,7 +57,7 @@ uint16_t TS_TOP = 890;
 
 TouchScreen ts = TouchScreen(XP, YP, XM, YM, 300);
 
-#define MINPRESSURE 20
+#define MINPRESSURE 30
 #define MAXPRESSURE 10000
 
 #define SWAP(a, b) {uint16_t tmp = a; a = b; b = tmp;}
@@ -287,8 +287,9 @@ void showMainScreen() {
   String tempString = String(temperature) + " C" + "  " + String(humidity) + "%";
   tft.setCursor((400 - tempString.length() * 21) / 2, 10 + 62 + 10 + 23 + 10 + 23);
   tft.println(tempString);
-    
-  tft.setCursor((400 - tempString.length() * 21) / 2 + String(temperature).length() * 21, 10 + 62 + 10 + 23 + 10 + 17);
+
+  tft.setFont(&FreeMonoBold12pt7b);
+  tft.setCursor((400 - tempString.length() * 21) / 2 + String(temperature).length() * 21 + 2, 10 + 62 + 10 + 23 + 10 + 12);
   tft.println("o");
 
   tft.setFont(&FreeMono9pt7b);
@@ -356,6 +357,8 @@ void touchScreen() {
 
 void loop(void) {
   screen = 1;
+
+  delay(1000);
 
   while (true) {
     for (int i = 0; i < 100; i++) {
